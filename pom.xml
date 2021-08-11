@@ -55,6 +55,7 @@
                 </executions>
                 <configuration>
                     <skip>true</skip>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
         </plugins>
