@@ -9,13 +9,13 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: '4c8e7db9-7472-409e-8b5a-49c63cab73e1'
+  azureSubscription: 'Azure Subscription 1'
   
   # Web app name
   webAppName: 'java-spring-boot'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'Srija1'
 
 stages:
 - stage: Build
@@ -24,7 +24,7 @@ stages:
   - job: MavenPackageAndPublishArtifacts
     displayName: Maven Package and Publish Artifacts
     pool:
-      vmImage: $(vmImageName)
+      name: Srija1
     
     steps:
     - task: Maven@3
@@ -53,7 +53,7 @@ stages:
     displayName: Deploy Linux Web App
     environment: 'development'
     pool: 
-      vmImage: $(vmImageName)
+      name: Srija1
     strategy:
       runOnce:
         deploy:
@@ -70,3 +70,8 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
+          - task: Docker@2
+            inputs:
+              repository: 'Srijafirst.azurecr.io'
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
