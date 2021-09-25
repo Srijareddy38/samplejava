@@ -1,5 +1,3 @@
 FROM maven as mvn
-
-COPY . .
-
-RUN mvn -f app/pom.xml clean package
+ADD target/gs-spring-boot-0.1.0.jar gs-spring-boot-0.1.0.jar
+ENTRYPOINT ["java","-jar","gs-spring-boot-0.1.0.jar"]
